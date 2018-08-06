@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="scanPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <iterator Binds="VOCustScannedHeader1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOCustScannedHeader1Iterator"/>
+    <variableIterator id="variables">
+      <variableUsage DataControl="AppModuleDataControl" Binds="VOChallansAll1.variablesMap.ch_id"
+                     Name="ExecuteWithParams1_ch_id" IsQueriable="false"/>
+      <variableUsage DataControl="AppModuleDataControl" Binds="VOChallanLinesAll1.variablesMap.pack_id"
+                     Name="ExecuteWithParams_pack_id" IsQueriable="false"/>
+      <variableUsage DataControl="AppModuleDataControl" Binds="VOChallanLinesAll1.variablesMap.cid"
+                     Name="ExecuteWithParams_cid" IsQueriable="false"/>
+    </variableIterator>
+    <iterator Binds="VOCustScannedLines2" RangeSize="6" DataControl="AppModuleDataControl"
+              id="VOCustScannedLines2Iterator"/>
+    <iterator Binds="VOChallanLinesAll1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOChallanLinesAll1Iterator"/>
+    <iterator Binds="VOCustScannedLines1" RangeSize="10" DataControl="AppModuleDataControl"
+              id="VOCustScannedLines1Iterator"/>
+    <taskFlow id="diagrams1" taskFlowId="/WEB-INF/diagrams.xml#diagrams" activation="deferred"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"/>
+    <iterator Binds="VOChallansAll1" RangeSize="10" DataControl="AppModuleDataControl" id="VOChallansAll1Iterator"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="DeliveryChallan">
+      <AttrNames>
+        <Item Value="DeliveryChallan"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="ScanHeaderId">
+      <AttrNames>
+        <Item Value="ScanHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="ChallanId">
+      <AttrNames>
+        <Item Value="ChallanId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="ChallanNumber">
+      <AttrNames>
+        <Item Value="ChallanNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="VehicleType">
+      <AttrNames>
+        <Item Value="VehicleType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="DriverContacts">
+      <AttrNames>
+        <Item Value="DriverContacts"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="ChallanDescription">
+      <AttrNames>
+        <Item Value="ChallanDescription"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="MediumType">
+      <AttrNames>
+        <Item Value="MediumType"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="DeliveryDate">
+      <AttrNames>
+        <Item Value="DeliveryDate"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="ChallanStatus">
+      <AttrNames>
+        <Item Value="ChallanStatus"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="VehicleNumber">
+      <AttrNames>
+        <Item Value="VehicleNumber"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="MediumTypeName">
+      <AttrNames>
+        <Item Value="MediumTypeName"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="VehicleTypeName">
+      <AttrNames>
+        <Item Value="VehicleTypeName"/>
+      </AttrNames>
+    </attributeValues>
+    <tree IterBinding="VOCustScannedLines2Iterator" id="VOCustScannedLines2">
+      <nodeDefinition DefName="com.usaparel.model.VO.VOCustScannedLines" Name="VOCustScannedLines20">
+        <AttrNames>
+          <Item Value="ScannedLineId"/>
+          <Item Value="PoHeaderId"/>
+          
+          <Item Value="PoLineId"/>
+          <Item Value="ItemId"/>
+          
+          <Item Value="PackingId"/>
+          <Item Value="PackingQty"/>
+          <Item Value="ScannedDate"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="UpdatedBy"/>
+          <Item Value="Version"/>
+          <Item Value="Status"/>
+          <Item Value="ReturnQuantity"/>
+          <Item Value="ScanHeaderId"/>
+          <Item Value="BadQty"/>
+          <Item Value="ShortQty"/>
+          <Item Value="ItemCode"/>
+          <Item Value="Description"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="VOCustScannedLines2Iterator" id="CreateInsert1"
+            InstanceName="AppModuleDataControl.VOCustScannedLines2" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action IterBinding="VOChallanLinesAll1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="pack_id" NDType="oracle.jbo.domain.Number" NDValue="${bindings.ExecuteWithParams_pack_id}"/>
+      <NamedData NDName="cid" NDType="oracle.jbo.domain.Number" NDValue="${bindings.ExecuteWithParams_cid}"/>
+    </action>
+    <attributeValues IterBinding="variables" id="pack_id">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_pack_id"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="variables" id="cid">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_cid"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction IterBinding="VOCustScannedHeader1Iterator" id="scanComplete" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="scanComplete" IsViewObjectMethod="false"
+                  DataControl="AppModuleDataControl" InstanceName="bindings.VOCustScannedHeader1Iterator.currentRow"
+                  IsLocalObjectReference="true">
+      <NamedData NDName="challan_id" NDValue="#{bindings.DeliveryChallan.inputValue}" NDType="java.lang.String"/>
+    </methodAction>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="ScanComplete">
+      <AttrNames>
+        <Item Value="ScanComplete"/>
+      </AttrNames>
+    </attributeValues>
+    <methodAction id="getScannedPacks" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getScannedPacks"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="bindings.getScannedPacks.dataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.getScannedPacks_getScannedPacks_dataControl_dataProvider_getScannedPacks_result">
+      <NamedData NDName="packingID" NDType="int"/>
+    </methodAction>
+    <action id="Commit" DataControl="AppModuleDataControl" RequiresUpdateModel="true" Action="commitTransaction"/>
+    <methodAction id="challanExists" RequiresUpdateModel="true" Action="invokeMethod" MethodName="challanExists"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="bindings.challanExists.dataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.challanExists_challanExists_dataControl_dataProvider_challanExists_result">
+      <NamedData NDName="challan_id" NDType="int"/>
+    </methodAction>
+    <attributeValues IterBinding="variables" id="ch_id">
+      <AttrNames>
+        <Item Value="ExecuteWithParams1_ch_id"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOChallansAll1Iterator" id="ExecuteWithParams1"
+            InstanceName="AppModuleDataControl.VOChallansAll1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="executeWithParams">
+      <NamedData NDName="ch_id" NDValue="${bindings.ExecuteWithParams1_ch_id}" NDType="java.lang.String"/>
+    </action>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+  </bindings>
+</pageDefinition>

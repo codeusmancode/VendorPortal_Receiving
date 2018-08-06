@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="tf-ship-rcv-ctrl">
+    <default-activity>has_session</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <managed-bean id="__15">
+      <managed-bean-name>SessionHandlerBean</managed-bean-name>
+      <managed-bean-class>com.usaparel.view.SessionHandler</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__16">
+      <managed-bean-name>RcvCtrlBean</managed-bean-name>
+      <managed-bean-class>com.usaparel.view.RcvCtrl</managed-bean-class>
+      <managed-bean-scope>backingBean</managed-bean-scope>
+    </managed-bean>
+    <managed-bean id="__12">
+      <managed-bean-name>ScanOperations</managed-bean-name>
+      <managed-bean-class>com.usaparel.view.Scan</managed-bean-class>
+      <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <task-flow-call id="login-tf">
+      <task-flow-reference>
+        <document>/WEB-INF/login-tf.xml</document>
+        <id>login-tf</id>
+      </task-flow-reference>
+      <return-value id="__1">
+        <name>status</name>
+        <value>#{pageFlowScope.userid}</value>
+      </return-value>
+      <return-value id="__2">
+        <name>username</name>
+        <value>#{pageFlowScope.username}</value>
+      </return-value>
+    </task-flow-call>
+    <router id="login_success">
+      <case id="__8">
+        <expression>#{pageFlowScope.userid != -1}</expression>
+        <outcome>success</outcome>
+      </case>
+      <case id="__9">
+        <expression>#{pageFlowScope.userid == -1}</expression>
+        <outcome>fail</outcome>
+      </case>
+      <default-outcome>fail</default-outcome>
+    </router>
+    <method-call id="saveSessionValues">
+      <method>#{backingBeanScope.SessionHandlerBean.saveSessionValues}</method>
+      <parameter>
+        <class>java.lang.String</class>
+        <value>#{pageFlowScope.userid}</value>
+      </parameter>
+      <parameter>
+        <class>java.lang.String</class>
+        <value>#{pageFlowScope.username}</value>
+      </parameter>
+      <outcome>
+        <fixed-outcome>goto_app</fixed-outcome>
+      </outcome>
+    </method-call>
+    <view id="scan">
+      <page>/fragments/scan.jsff</page>
+    </view>
+    <method-call id="logout">
+      <method>#{requestScope.ScanOperations.logout}</method>
+      <outcome>
+        <fixed-outcome>logout</fixed-outcome>
+      </outcome>
+    </method-call>
+    <router id="has_session">
+      <case id="__19">
+        <expression>#{sessionScope.username == null}</expression>
+        <outcome>login_false</outcome>
+      </case>
+      <case id="__22">
+        <expression>#{sessionScope.username != null}</expression>
+        <outcome>login_true</outcome>
+      </case>
+      <default-outcome>login_false</default-outcome>
+    </router>
+    <control-flow-rule id="__3">
+      <from-activity-id>login-tf</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>taskFlowReturn1</from-outcome>
+        <to-activity-id>login_success</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__5">
+      <from-activity-id>login_success</from-activity-id>
+      <control-flow-case id="__6">
+        <from-outcome>success</from-outcome>
+        <to-activity-id>saveSessionValues</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__7">
+        <from-outcome>fail</from-outcome>
+        <to-activity-id>login-tf</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__10">
+      <from-activity-id>saveSessionValues</from-activity-id>
+      <control-flow-case id="__11">
+        <from-outcome>goto_app</from-outcome>
+        <to-activity-id>scan</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__13">
+      <from-activity-id>scan</from-activity-id>
+      <control-flow-case id="__14">
+        <from-outcome>logout</from-outcome>
+        <to-activity-id>logout</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__17">
+      <from-activity-id>logout</from-activity-id>
+      <control-flow-case id="__18">
+        <to-activity-id>login-tf</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__24">
+      <from-activity-id>has_session</from-activity-id>
+      <control-flow-case id="__25">
+        <from-outcome>login_false</from-outcome>
+        <to-activity-id>login-tf</to-activity-id>
+      </control-flow-case>
+      <control-flow-case id="__26">
+        <from-outcome>login_true</from-outcome>
+        <to-activity-id>scan</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

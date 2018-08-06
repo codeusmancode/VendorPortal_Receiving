@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="testPageDef"
+                Package="com.usaparel.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variableUsage DataControl="AppModuleDataControl" Binds="VOPacksAll1.variablesMap.bvPackingID"
+                     Name="ExecuteWithParams_bvPackingID" IsQueriable="false"/>
+    </variableIterator>
+    <iterator Binds="VOPacksAll1" RangeSize="25" DataControl="AppModuleDataControl" id="VOPacksAll1Iterator"/>
+    <iterator Binds="VOCustScannedHeader1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOCustScannedHeader1Iterator"/>
+    <iterator Binds="VOCustScannedLines2" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOCustScannedLines2Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOPacksAll1Iterator" id="VOPacksAll1">
+      <nodeDefinition DefName="com.usaparel.model.VO.VOPacksAll" Name="VOPacksAll10">
+        <AttrNames>
+          <Item Value="PoHeaderId"/>
+          <Item Value="Segment1"/>
+          <Item Value="TypeLookupCode"/>
+          <Item Value="CreationDate"/>
+          <Item Value="OrgId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ItemId"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="ShipId"/>
+          <Item Value="ShipQty"/>
+          <Item Value="PackingId"/>
+          <Item Value="PackingQty"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="VOPacksAll1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="bvPackingID" NDType="oracle.jbo.domain.Number"
+                 NDValue="${bindings.ExecuteWithParams_bvPackingID}"/>
+    </action>
+    <attributeValues IterBinding="variables" id="bvPackingID">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_bvPackingID"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="DeliveryChallan">
+      <AttrNames>
+        <Item Value="DeliveryChallan"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VOCustScannedHeader1Iterator" id="ScanHeaderId">
+      <AttrNames>
+        <Item Value="ScanHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="First" RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="Previous" RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="Next" RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="Last" RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="VOCustScannedLines2Iterator" id="VOCustScannedLines2">
+      <nodeDefinition DefName="com.usaparel.model.VO.VOCustScannedLines" Name="VOCustScannedLines20">
+        <AttrNames>
+          <Item Value="ScannedLineId"/>
+          <Item Value="PoHeaderId"/>
+          <Item Value="Segment1"/>
+          <Item Value="TypeLookupCode"/>
+          <Item Value="CreationDate"/>
+          <Item Value="OrgId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ItemId"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="PackingId"/>
+          <Item Value="PackingQty"/>
+          <Item Value="ScannedDate"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="UpdatedBy"/>
+          <Item Value="Version"/>
+          <Item Value="Status"/>
+          <Item Value="ReturnQuantity"/>
+          <Item Value="ScanHeaderId"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="VOCustScannedLines2Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+    <action IterBinding="VOCustScannedHeader1Iterator" id="CreateInsert1" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

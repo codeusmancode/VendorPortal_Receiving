@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<adfc-config xmlns="http://xmlns.oracle.com/adf/controller" version="1.2">
+  <task-flow-definition id="diagrams">
+    <default-activity>challanwise_invalidqty</default-activity>
+    <data-control-scope>
+      <shared/>
+    </data-control-scope>
+    <view id="challanwise_invalidqty">
+      <page>/fragments/challanwise_invalidqty.jsff</page>
+    </view>
+    <view id="challanwise_invalid_pie">
+      <page>/fragments/challanwise_invalid_pie.jsff</page>
+    </view>
+    <control-flow-rule id="__1">
+      <from-activity-id>challanwise_invalidqty</from-activity-id>
+      <control-flow-case id="__2">
+        <from-outcome>showpie</from-outcome>
+        <to-activity-id>challanwise_invalid_pie</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <control-flow-rule id="__3">
+      <from-activity-id>challanwise_invalid_pie</from-activity-id>
+      <control-flow-case id="__4">
+        <from-outcome>back</from-outcome>
+        <to-activity-id>challanwise_invalidqty</to-activity-id>
+      </control-flow-case>
+    </control-flow-rule>
+    <use-page-fragments/>
+  </task-flow-definition>
+</adfc-config>

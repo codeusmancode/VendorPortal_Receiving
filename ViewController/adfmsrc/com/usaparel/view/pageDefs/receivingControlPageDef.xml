@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="receivingControlPageDef"
+                Package="com.usaparel.view.pageDefs">
+  <parameters/>
+  <executables>
+    <iterator Binds="VOCustScannedPacks1" RangeSize="7" DataControl="AppModuleDataControl"
+              id="VOCustScannedPacks1Iterator" RowCountThreshold="-1"/>
+    <searchRegion Binds="VOCustScannedPacks1Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer" id="VOCustScannedPacks1Query"/>
+    <iterator Binds="VOPacksAll1" RangeSize="25" DataControl="AppModuleDataControl" id="VOPacksAll1Iterator"/>
+    <variableIterator id="variables">
+      <variableUsage DataControl="AppModuleDataControl" Binds="VOPacksAll1.variablesMap.bvPackingID"
+                     Name="ExecuteWithParams_bvPackingID" IsQueriable="false"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOCustScannedPacks1Iterator" id="VOCustScannedPacks1">
+      <nodeDefinition DefName="com.usaparel.model.VO.VOCustScannedPacks" Name="VOCustScannedPacks10">
+        <AttrNames>
+          <Item Value="PoHeaderId"/>
+          <Item Value="Segment1"/>
+          <Item Value="TypeLookupCode"/>
+          <Item Value="CreationDate"/>
+          <Item Value="OrgId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ItemId"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="ShipId"/>
+          <Item Value="ShipQty"/>
+          <Item Value="PackingId"/>
+          <Item Value="PackingQty"/>
+          <Item Value="ScannedDate"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="UpdatedBy"/>
+          <Item Value="Version"/>
+          <Item Value="Status"/>
+          <Item Value="ReturnQuantity"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action IterBinding="VOPacksAll1Iterator" id="ExecuteWithParams" RequiresUpdateModel="true"
+            Action="executeWithParams">
+      <NamedData NDName="bvPackingID" NDType="oracle.jbo.domain.Number"
+                 NDValue="${bindings.ExecuteWithParams_bvPackingID}"/>
+    </action>
+    <attributeValues IterBinding="variables" id="bvPackingID">
+      <AttrNames>
+        <Item Value="ExecuteWithParams_bvPackingID"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VOCustScannedPacks1Iterator" id="CreateInsert"
+            InstanceName="AppModuleDataControl.VOCustScannedPacks1" DataControl="AppModuleDataControl"
+            RequiresUpdateModel="true" Action="createInsertRow"/>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action id="Rollback" RequiresUpdateModel="false" Action="rollbackTransaction" DataControl="AppModuleDataControl"/>
+    <methodAction id="getScannedPacks" RequiresUpdateModel="true" Action="invokeMethod" MethodName="getScannedPacks"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="bindings.getScannedPacks.dataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.getScannedPacks_getScannedPacks_dataControl_dataProvider_getScannedPacks_result">
+      <NamedData NDName="packingID" NDType="int"/>
+    </methodAction>
+    <methodAction id="initialStatus" RequiresUpdateModel="true" Action="invokeMethod" MethodName="initialStatus"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="bindings.initialStatus.dataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.initialStatus_initialStatus_dataControl_dataProvider_initialStatus_result">
+      <NamedData NDName="pid" NDType="int"/>
+      <NamedData NDName="s" NDType="int"/>
+    </methodAction>
+    <methodAction id="adjustQuantity" RequiresUpdateModel="true" Action="invokeMethod" MethodName="adjustQuantity"
+                  IsViewObjectMethod="false" DataControl="AppModuleDataControl"
+                  InstanceName="bindings.adjustQuantity.dataControl.dataProvider"
+                  ReturnName="data.AppModuleDataControl.methodResults.adjustQuantity_adjustQuantity_dataControl_dataProvider_adjustQuantity_result">
+      <NamedData NDName="newShipID" NDType="int"/>
+      <NamedData NDName="newPackingID" NDType="int"/>
+      <NamedData NDName="newStatus" NDType="int"/>
+      <NamedData NDName="newPackingQty" NDType="int"/>
+      <NamedData NDName="newQuantity" NDType="int"/>
+    </methodAction>
+    <attributeValues IterBinding="VOCustScannedPacks1Iterator" id="Status">
+      <AttrNames>
+        <Item Value="Status"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

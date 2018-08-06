@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="challanwise_invalidqtyPageDef"
+                Package="fragments">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="ChallanWiseInvalidQty1" RangeSize="-1" DataControl="AppModuleDataControl"
+              id="ChallanWiseInvalidQty1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="ChallanWiseInvalidQty1Iterator" id="ChallanWiseInvalidQty1" ChangeEventPolicy="ppr">
+      <nodeDefinition DefName="com.usaparel.model.VO.ChallanWiseInvalidQty" Name="ChallanWiseInvalidQty1">
+        <AttrNames>
+          <Item Value="TotalBad"/>
+          <Item Value="ChallanId"/>
+          <Item Value="TotalMissing"/>
+          <Item Value="TotalShort"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+  </bindings>
+</pageDefinition>

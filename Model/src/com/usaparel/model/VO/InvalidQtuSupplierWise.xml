@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="InvalidQtuSupplierWise"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.usaparel.model.VO.InvalidQtuSupplierWise_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[with invalid_qty as (  
+select sum(nvl(csp.packing_qty,0)-nvl(csp.short_qty,0)-nvl(csp.missing_qty,0)-nvl(csp.bad_qty,0)) accepted ,SUM(NVL(CSP.BAD_QTY,0)) TOTAL_BAD,SUM(NVL(CSP.SHORT_QTY,0)) TOTAL_SHORT,SUM(NVL(CSP.MISSING_QTY,0)) TOTAL_MISSING  
+from cust_shipment_delivery_challan dc,  
+    cust_shipment_packing csp  
+where dc.challan_id = csp.delivery_challan_id)  
+select iq.total_bad INVALID ,'BAD' type  
+from invalid_qty iq  
+union all  
+select iq.total_missing,'MISSING' TYPE  
+from invalid_qty iq  
+union all  
+select iq.total_short,'SHORT' TYPE  
+from invalid_qty iq 
+union all  
+select iq.accepted,'ACCEPTED' TYPE  
+from invalid_qty iq]]></SQLQuery>
+  <ViewAttribute
+    Name="Invalid"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="INVALID"
+    Expression="INVALID"
+    SQLType="NUMERIC">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="39"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="Type"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="7"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TYPE"
+    Expression="TYPE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="7"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.usaparel.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

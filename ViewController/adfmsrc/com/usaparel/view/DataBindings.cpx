@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.2.1.12.24" id="DataBindings"
+             SeparateXMLFiles="false" Package="com.usaparel.view" ClientType="Generic"
+             >
+             <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding"
+             className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+    <factory nameSpace="http://xmlns.oracle.com/adfm/dvt"
+             className="oracle.adfinternal.view.faces.dvt.model.binding.FacesBindingFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/test.jsf" usageId="com_usaparel_view_testPageDef"/>
+    <page path="/untitled1.jsf" usageId="com_usaparel_view_untitled1PageDef"/>
+    <page path="/receivingControl.jsff" usageId="com_usaparel_view_receivingControlPageDef"/>
+    <page path="/untitled2.jsf" usageId="com_usaparel_view_untitled2PageDef"/>
+    <page path="/receivingApp.jsf" usageId="com_usaparel_view_receivingAppPageDef"/>
+    <page path="/fragments/scan.jsff" usageId="com_usaparel_view_scanPageDef"/>
+    <page path="/fragments/challanwise_invalidqty.jsff" usageId="com_usaparel_view_challanwise_invalidqtyPageDef"/>
+    <page path="/fragments/challanwise_invalid_pie.jsff" usageId="com_usaparel_view_challanwise_invalid_piePageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="com_usaparel_view_testPageDef" path="com.usaparel.view.pageDefs.testPageDef"/>
+    <page id="com_usaparel_view_untitled1PageDef" path="com.usaparel.view.pageDefs.untitled1PageDef"/>
+    <page id="com_usaparel_view_receivingControlPageDef" path="com.usaparel.view.pageDefs.receivingControlPageDef"/>
+    <page id="com_usaparel_view_untitled2PageDef" path="com.usaparel.view.pageDefs.untitled2PageDef"/>
+    <page id="com_usaparel_view_receivingAppPageDef" path="com.usaparel.view.pageDefs.receivingAppPageDef"/>
+    <page id="com_usaparel_view_scanPageDef" path="fragments.scanPageDef"/>
+    <page id="com_usaparel_view_challanwise_invalidqtyPageDef" path="fragments.challanwise_invalidqtyPageDef"/>
+    <page id="com_usaparel_view_challanwise_invalid_piePageDef" path="fragments.challanwise_invalid_piePageDef"/>
+  </pageDefinitionUsages>
+  <dataControlUsages>
+    <BC4JDataControl id="AppModuleDataControl" Package="com.usaparel.model.AM"
+                     FactoryClass="oracle.adf.model.bc4j.DataControlFactoryImpl" SupportsTransactions="true"
+                     SupportsFindMode="true" SupportsRangesize="true" SupportsResetState="true"
+                     SupportsSortCollection="true" Configuration="AppModuleLocal" syncMode="Immediate"
+                     xmlns="http://xmlns.oracle.com/adfm/datacontrol"/>
+  </dataControlUsages>
+</Application>

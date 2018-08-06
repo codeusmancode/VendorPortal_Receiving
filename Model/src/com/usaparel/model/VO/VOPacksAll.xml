@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="VOPacksAll"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.usaparel.model.VO.VOPacksAll_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <Variable
+    Name="bvPackingID"
+    Kind="where"
+    Type="oracle.jbo.domain.Number"/>
+  <SQLQuery><![CDATA[select      
+        pha.po_header_id,     
+        pha.segment1,     
+        pha.type_lookup_code,     
+        pha.creation_Date,     
+        pha.org_id,     
+        pla.po_line_id,     
+        pla.item_id,     
+        pla.item_description,     
+        csl.ship_id,     
+        csl.ship_qty,     
+        csp.packing_id,     
+        csp.packing_qty     
+from cust_shipment_packing csp,     
+     cust_shipment_lines csl,     
+     po_lines_all pla,     
+     po_headers_all pha     
+where csp.packing_id = :bvPackingID    
+and csp.ship_id = csl.ship_id     
+and csl.po_line_id = pla.po_line_id     
+and pla.po_header_id = pha.po_header_id     
+AND pha.enabled_flag = 'Y'     
+AND pha.approved_flag = 'Y'     
+AND pha.closed_date IS NULL     
+and pha.org_id = pla.org_id 
+and csp.status = 'SHIPPED']]></SQLQuery>
+  <ViewAttribute
+    Name="PoHeaderId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PO_HEADER_ID"
+    Expression="PO_HEADER_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="Segment1"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="20"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="SEGMENT1"
+    Expression="SEGMENT1"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="20"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="TypeLookupCode"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="25"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="TYPE_LOOKUP_CODE"
+    Expression="TYPE_LOOKUP_CODE"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="25"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="CreationDate"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.sql.Timestamp"
+    ColumnType="DATE"
+    AliasName="CREATION_DATE"
+    Expression="CREATION_DATE"
+    SQLType="DATE"/>
+  <ViewAttribute
+    Name="OrgId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ORG_ID"
+    Expression="ORG_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PoLineId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PO_LINE_ID"
+    Expression="PO_LINE_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ItemId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="ITEM_ID"
+    Expression="ITEM_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ItemDescription"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Precision="240"
+    Type="java.lang.String"
+    ColumnType="VARCHAR2"
+    AliasName="ITEM_DESCRIPTION"
+    Expression="ITEM_DESCRIPTION"
+    SQLType="VARCHAR">
+    <DesignTime>
+      <Attr Name="_DisplaySize" Value="240"/>
+    </DesignTime>
+  </ViewAttribute>
+  <ViewAttribute
+    Name="ShipId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SHIP_ID"
+    Expression="SHIP_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ShipQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="SHIP_QTY"
+    Expression="SHIP_QTY"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PackingId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PACKING_ID"
+    Expression="PACKING_ID"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="PackingQty"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="PACKING_QTY"
+    Expression="PACKING_QTY"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="PackingId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.usaparel.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

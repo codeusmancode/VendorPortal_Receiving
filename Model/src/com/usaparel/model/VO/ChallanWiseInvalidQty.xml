@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE ViewObject SYSTEM "jbo_03_01.dtd">
+<!---->
+<ViewObject
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ChallanWiseInvalidQty"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge"
+  BindingStyle="OracleName"
+  CustomQuery="true"
+  PageIterMode="Full">
+  <DesignTime>
+    <Attr Name="_isExpertMode" Value="true"/>
+  </DesignTime>
+  <Properties>
+    <SchemaBasedProperties>
+      <LABEL
+        ResId="com.usaparel.model.AM.ChallanWiseInvalidQty_LABEL"/>
+    </SchemaBasedProperties>
+  </Properties>
+  <SQLQuery><![CDATA[select SUM(NVL(CSP.BAD_QTY,0)) TOTAL_BAD,SUM(NVL(CSP.SHORT_QTY,0)) TOTAL_SHORT,SUM(NVL(CSP.MISSING_QTY,0)) TOTAL_MISSING,DC.CHALLAN_ID  
+from cust_shipment_delivery_challan dc, 
+    cust_shipment_packing csp 
+where dc.challan_id = csp.delivery_challan_id 
+GROUP BY DC.CHALLAN_ID]]></SQLQuery>
+  <ViewAttribute
+    Name="TotalBad"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_BAD"
+    Expression="TOTAL_BAD"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotalShort"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_SHORT"
+    Expression="TOTAL_SHORT"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="TotalMissing"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="TOTAL_MISSING"
+    Expression="TOTAL_MISSING"
+    SQLType="NUMERIC"/>
+  <ViewAttribute
+    Name="ChallanId"
+    IsUpdateable="false"
+    IsPersistent="false"
+    PrecisionRule="true"
+    Type="java.math.BigDecimal"
+    ColumnType="NUMBER"
+    AliasName="CHALLAN_ID"
+    Expression="CHALLAN_ID"
+    SQLType="NUMERIC"/>
+  <AttrArray Name="KeyAttributes">
+    <Item Value="ChallanId"/>
+  </AttrArray>
+  <ResourceBundle>
+    <PropertiesBundle
+      PropertiesFile="com.usaparel.model.ModelBundle"/>
+  </ResourceBundle>
+</ViewObject>

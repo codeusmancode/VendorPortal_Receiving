@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<!DOCTYPE Association SYSTEM "jbo_03_01.dtd">
+<!---->
+<Association
+  xmlns="http://xmlns.oracle.com/bc4j"
+  Name="ScanHeaderLines"
+  Version="12.2.1.12.24"
+  InheritPersonalization="merge">
+  <DesignTime>
+    <Attr Name="_isCodegen" Value="true"/>
+  </DesignTime>
+  <AssociationEnd
+    Name="CustScannedHeader"
+    Cardinality="1"
+    Source="true"
+    Owner="com.usaparel.model.EO.CustScannedHeader"
+    CascadeDelete="true"
+    LockLevel="NONE">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="CustScannedHeader"/>
+      <Attr Name="_foreignKey" Value="com.usaparel.model.EO.CustScannedHeader.CustscannedheaderPrimaryKey"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.usaparel.model.EO.CustScannedHeader.ScanHeaderId"/>
+    </AttrArray>
+  </AssociationEnd>
+  <AssociationEnd
+    Name="CustScannedLines"
+    Cardinality="-1"
+    Owner="com.usaparel.model.EO.CustScannedLines">
+    <DesignTime>
+      <Attr Name="_isUpdateable" Value="true"/>
+      <Attr Name="_aggregation" Value="0"/>
+      <Attr Name="_finderName" Value="CustScannedLines"/>
+      <Attr Name="_foreignKey" Value="com.usaparel.model.EO.CustScannedLines.fk_CustScannedLines"/>
+    </DesignTime>
+    <AttrArray Name="Attributes">
+      <Item Value="com.usaparel.model.EO.CustScannedLines.ScanHeaderId"/>
+    </AttrArray>
+  </AssociationEnd>
+</Association>

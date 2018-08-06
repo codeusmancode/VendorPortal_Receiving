@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.2.1.12.24" id="untitled2PageDef"
+                Package="com.usaparel.view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VOCustScannedPacks1" RangeSize="25" DataControl="AppModuleDataControl"
+              id="VOCustScannedPacks1Iterator"/>
+  </executables>
+  <bindings>
+    <tree IterBinding="VOCustScannedPacks1Iterator" id="VOCustScannedPacks1">
+      <nodeDefinition DefName="com.usaparel.model.VO.VOCustScannedPacks" Name="VOCustScannedPacks10">
+        <AttrNames>
+          <Item Value="PoHeaderId"/>
+          <Item Value="Segment1"/>
+          <Item Value="TypeLookupCode"/>
+          <Item Value="CreationDate"/>
+          <Item Value="OrgId"/>
+          <Item Value="PoLineId"/>
+          <Item Value="ItemId"/>
+          <Item Value="ItemDescription"/>
+          <Item Value="ShipId"/>
+          <Item Value="ShipQty"/>
+          <Item Value="PackingId"/>
+          <Item Value="PackingQty"/>
+          <Item Value="ScannedDate"/>
+          <Item Value="CreatedDate"/>
+          <Item Value="UpdatedDate"/>
+          <Item Value="CreatedBy"/>
+          <Item Value="UpdatedBy"/>
+          <Item Value="Version"/>
+          <Item Value="Status"/>
+          <Item Value="ReturnQuantity"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction" DataControl="AppModuleDataControl"/>
+    <action IterBinding="VOCustScannedPacks1Iterator" id="CreateInsert" RequiresUpdateModel="true"
+            Action="createInsertRow"/>
+  </bindings>
+</pageDefinition>

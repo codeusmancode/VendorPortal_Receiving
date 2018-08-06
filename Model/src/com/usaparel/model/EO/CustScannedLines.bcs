@@ -1,0 +1,12 @@
+//Groovy Scripts for com.usaparel.model.EO.CustScannedLines
+
+package com.usaparel.model.EO
+
+import oracle.jbo.script.annotation.TransientValueExpression;
+
+@TransientValueExpression(attributeName="ScannedLineId")
+def ScannedLineId_ExpressionScript_Expression()
+{
+(new oracle.jbo.server.SequenceImpl("seq_scan_line",adf.object.getDBTransaction())).getSequenceNumber()
+}
+

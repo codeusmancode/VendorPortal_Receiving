@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <af:panelGroupLayout id="pgl1" layout="scroll">
+    <af:panelGroupLayout id="pgl2" layout="horizontal" styleClass="AFStretchWidth"
+                         inlineStyle="background-color:#00688B;">
+      <af:activeOutputText value="Scan Challan" id="aot1" inlineStyle="color:white; font-size:17px;"/>
+    </af:panelGroupLayout>
+    <af:panelGroupLayout id="pgl3" layout="vertical">
+      <af:panelFormLayout id="pfl1" maxColumns="2" rows="5">
+        <af:inputText value="#{bindings.DeliveryChallan.inputValue}" label="Scan Barcode Here"
+                      required="#{bindings.DeliveryChallan.hints.mandatory}"
+                      columns="#{bindings.DeliveryChallan.hints.displayWidth}"
+                      maximumLength="#{bindings.DeliveryChallan.hints.precision}"
+                      shortDesc="#{bindings.DeliveryChallan.hints.tooltip}" id="it1" autoSubmit="true"
+                      valueChangeListener="#{ScanOperations.challanHeaderScan}"
+                      readOnly="#{bindings.DeliveryChallan.inputValue != null}" showRequired="true">
+          <f:validator binding="#{bindings.DeliveryChallan.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.DeliveryChallan.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ScanHeaderId.inputValue}" label="#{bindings.ScanHeaderId.hints.label}"
+                      required="#{bindings.ScanHeaderId.hints.mandatory}"
+                      columns="#{bindings.ScanHeaderId.hints.displayWidth}"
+                      maximumLength="#{bindings.ScanHeaderId.hints.precision}"
+                      shortDesc="#{bindings.ScanHeaderId.hints.tooltip}" id="it2" rendered="false">
+          <f:validator binding="#{bindings.ScanHeaderId.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ScanHeaderId.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ChallanId.inputValue}" label="#{bindings.ChallanId.hints.label}"
+                      required="#{bindings.ChallanId.hints.mandatory}"
+                      columns="#{bindings.ChallanId.hints.displayWidth}"
+                      maximumLength="#{bindings.ChallanId.hints.precision}"
+                      shortDesc="#{bindings.ChallanId.hints.tooltip}" id="it3" rendered="false">
+          <f:validator binding="#{bindings.ChallanId.validator}"/>
+          <af:convertNumber groupingUsed="false" pattern="#{bindings.ChallanId.format}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ChallanNumber.inputValue}" label="#{bindings.ChallanNumber.hints.label}"
+                      required="#{bindings.ChallanNumber.hints.mandatory}"
+                      columns="#{bindings.ChallanNumber.hints.displayWidth}"
+                      maximumLength="#{bindings.ChallanNumber.hints.precision}"
+                      shortDesc="#{bindings.ChallanNumber.hints.tooltip}" id="it4" partialTriggers="it1"
+                      readOnly="true">
+          <f:validator binding="#{bindings.ChallanNumber.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.VehicleTypeName.inputValue}" label="#{bindings.VehicleTypeName.hints.label}"
+                      required="#{bindings.VehicleTypeName.hints.mandatory}"
+                      columns="#{bindings.VehicleTypeName.hints.displayWidth}"
+                      maximumLength="#{bindings.VehicleTypeName.hints.precision}"
+                      shortDesc="#{bindings.VehicleTypeName.hints.tooltip}" id="it5" readOnly="true">
+          <f:validator binding="#{bindings.VehicleTypeName.validator}"/>
+          
+        </af:inputText>
+        <af:inputText value="#{bindings.DriverContacts.inputValue}" label="#{bindings.DriverContacts.hints.label}"
+                      required="#{bindings.DriverContacts.hints.mandatory}"
+                      columns="#{bindings.DriverContacts.hints.displayWidth}"
+                      maximumLength="#{bindings.DriverContacts.hints.precision}"
+                      shortDesc="#{bindings.DriverContacts.hints.tooltip}" id="it6" readOnly="true">
+          <f:validator binding="#{bindings.DriverContacts.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.ChallanDescription.inputValue}"
+                      label="#{bindings.ChallanDescription.hints.label}"
+                      required="#{bindings.ChallanDescription.hints.mandatory}"
+                      columns="#{bindings.ChallanDescription.hints.displayWidth}"
+                      maximumLength="#{bindings.ChallanDescription.hints.precision}"
+                      shortDesc="#{bindings.ChallanDescription.hints.tooltip}" id="it7" readOnly="true">
+          <f:validator binding="#{bindings.ChallanDescription.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.MediumTypeName.inputValue}" label="#{bindings.MediumTypeName.hints.label}"
+                      required="#{bindings.MediumTypeName.hints.mandatory}"
+                      columns="#{bindings.MediumTypeName.hints.displayWidth}"
+                      maximumLength="#{bindings.MediumTypeName.hints.precision}"
+                      shortDesc="#{bindings.MediumTypeName.hints.tooltip}" id="it8" readOnly="true">
+          <f:validator binding="#{bindings.MediumTypeName.validator}"/>
+          
+        </af:inputText>
+        <af:inputDate value="#{bindings.DeliveryDate.inputValue}" label="#{bindings.DeliveryDate.hints.label}"
+                      required="#{bindings.DeliveryDate.hints.mandatory}"
+                      columns="#{bindings.DeliveryDate.hints.displayWidth}"
+                      shortDesc="#{bindings.DeliveryDate.hints.tooltip}" id="id1" readOnly="true">
+          <f:validator binding="#{bindings.DeliveryDate.validator}"/>
+          <af:convertDateTime pattern="#{bindings.DeliveryDate.format}"/>
+        </af:inputDate>
+        <af:inputText value="#{bindings.ChallanStatus.inputValue}" label="#{bindings.ChallanStatus.hints.label}"
+                      required="#{bindings.ChallanStatus.hints.mandatory}"
+                      columns="#{bindings.ChallanStatus.hints.displayWidth}"
+                      maximumLength="#{bindings.ChallanStatus.hints.precision}"
+                      shortDesc="#{bindings.ChallanStatus.hints.tooltip}" id="it9" readOnly="true">
+          <f:validator binding="#{bindings.ChallanStatus.validator}"/>
+        </af:inputText>
+        <af:inputText value="#{bindings.VehicleNumber.inputValue}" label="#{bindings.VehicleNumber.hints.label}"
+                      required="#{bindings.VehicleNumber.hints.mandatory}"
+                      columns="#{bindings.VehicleNumber.hints.displayWidth}"
+                      maximumLength="#{bindings.VehicleNumber.hints.precision}"
+                      shortDesc="#{bindings.VehicleNumber.hints.tooltip}" id="it10" readOnly="true">
+          <f:validator binding="#{bindings.VehicleNumber.validator}"/>
+        </af:inputText>
+        <af:panelGroupLayout id="pgl4" layout="horizontal">
+          <af:button actionListener="#{bindings.Rollback.execute}"
+                     disabled="#{!bindings.Rollback.enabled}" immediate="true" id="b10" text="Cancel">
+            <af:resetActionListener/>
+          </af:button>
+          <af:button text="New Challan"
+                     disabled="#{!bindings.CreateInsert.enabled}" id="b1"
+                     actionListener="#{bindings.CreateInsert.execute}"/>
+          <af:button actionListener="#{bindings.First.execute}" text="First" disabled="#{!bindings.First.enabled}"
+                     partialSubmit="true" id="b4"/>
+          <af:button actionListener="#{bindings.Next.execute}" text="Next" disabled="#{!bindings.Next.enabled}"
+                     partialSubmit="true" id="b3"/>
+          <af:button actionListener="#{bindings.Last.execute}" text="Last" disabled="#{!bindings.Last.enabled}"
+                     partialSubmit="true" id="b2"/>
+          <af:button actionListener="#{bindings.Previous.execute}" text="Previous"
+                     disabled="#{!bindings.Previous.enabled}" partialSubmit="true" id="b5"/>
+          <af:button text="Save" disabled="false"
+                     id="b6" action="#{ScanOperations.commit}"/>
+          <af:button text="Scan Complete"
+                     disabled="#{bindings.ScanComplete.inputValue eq 'Y'}" id="b9"
+                     action="#{ScanOperations.scanComplete}"/>
+          <af:button text="Exit" id="b7" action="logout"/>
+        </af:panelGroupLayout>
+      </af:panelFormLayout>
+    </af:panelGroupLayout>
+    <af:panelGroupLayout id="pgl5" styleClass="AFStretchWidth" inlineStyle="background-color:#00688B;"
+                         layout="horizontal">
+      <af:activeOutputText value="Scan Packs" id="aot2" inlineStyle="color:white; font-size:17px;"/>
+    </af:panelGroupLayout>
+    <af:inputText label="Scan Pack Barcode:" id="it28" valueChangeListener="#{ScanOperations.newPackScanned}"
+                  autoSubmit="true" binding="#{ScanOperations.itScanPack}"/>
+    <af:panelSplitter id="ps1" splitterPosition="795" styleClass="AFStretchWidth" disabled="true">
+      <f:facet name="first">
+        <af:table value="#{bindings.VOCustScannedLines2.collectionModel}" var="row"
+                  rows="#{bindings.VOCustScannedLines2.rangeSize}"
+                  emptyText="#{bindings.VOCustScannedLines2.viewable ? 'No data to display.' : 'Access Denied.'}"
+                  rowBandingInterval="0" selectedRowKeys="#{bindings.VOCustScannedLines2.collectionModel.selectedRow}"
+                  selectionListener="#{bindings.VOCustScannedLines2.collectionModel.makeCurrent}" rowSelection="single"
+                  fetchSize="#{bindings.VOCustScannedLines2.rangeSize}" id="t1" autoHeightRows="6"
+                  styleClass="AFStretchWidth" contentDelivery="immediate" partialTriggers="::b6">
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.ScannedLineId.label}" id="c1" rendered="false">
+            <af:inputText value="#{row.bindings.ScannedLineId.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.ScannedLineId.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.ScannedLineId.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.ScannedLineId.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.ScannedLineId.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.ScannedLineId.tooltip}" id="it12">
+              <f:validator binding="#{row.bindings.ScannedLineId.validator}"/>
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.VOCustScannedLines2.hints.ScannedLineId.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.PoHeaderId.label}" id="c2" rendered="false">
+            <af:inputText value="#{row.bindings.PoHeaderId.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.PoHeaderId.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.PoHeaderId.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.PoHeaderId.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.PoHeaderId.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.PoHeaderId.tooltip}" id="it13">
+              <f:validator binding="#{row.bindings.PoHeaderId.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.PoHeaderId.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.PoLineId.label}" id="c7" rendered="false">
+            <af:inputText value="#{row.bindings.PoLineId.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.PoLineId.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.PoLineId.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.PoLineId.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.PoLineId.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.PoLineId.tooltip}" id="it17">
+              <f:validator binding="#{row.bindings.PoLineId.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.PoLineId.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.ItemId.label}" id="c8" rendered="false">
+            <af:inputText value="#{row.bindings.ItemId.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.ItemId.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.ItemId.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.ItemId.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.ItemId.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.ItemId.tooltip}" id="it18">
+              <f:validator binding="#{row.bindings.ItemId.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.ItemId.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.PackingId.label}" id="c10" rendered="false">
+            <af:inputText value="#{row.bindings.PackingId.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.PackingId.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.PackingId.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.PackingId.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.PackingId.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.PackingId.tooltip}" id="it20">
+              <f:validator binding="#{row.bindings.PackingId.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.PackingId.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column id="c5" headerText="Item Code">
+            <af:inputText value="#{row.bindings.ItemCode.inputValue}" simple="true"
+                          required="#{bindings.VOCustScannedLines2.hints.ItemCode.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.ItemCode.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.ItemCode.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.ItemCode.tooltip}" id="it19">
+              <f:validator binding="#{row.bindings.ItemCode.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column id="c6" headerText="Description">
+            <af:inputText value="#{row.bindings.Description.inputValue}" simple="true"
+                          required="#{bindings.VOCustScannedLines2.hints.Description.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.Description.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.Description.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.Description.tooltip}" id="it16">
+              <f:validator binding="#{row.bindings.Description.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.PackingQty.label}" id="c11">
+            <af:inputText value="#{row.bindings.PackingQty.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.PackingQty.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.PackingQty.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.PackingQty.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.PackingQty.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.PackingQty.tooltip}" id="it21" disabled="true"
+                          readOnly="true">
+              <f:validator binding="#{row.bindings.PackingQty.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.PackingQty.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column id="c3" headerText="Bad Quantity">
+            <af:inputText value="#{row.bindings.BadQty.inputValue}"
+                          required="#{bindings.VOCustScannedLines2.hints.BadQty.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.BadQty.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.BadQty.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.BadQty.tooltip}" id="it14" disabled="false"
+                          readOnly="#{bindings.ScanComplete.inputValue eq 'Y'}">
+              <f:validator binding="#{row.bindings.BadQty.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.BadQty.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column id="c4" headerText="Short Quantity">
+            <af:inputText value="#{row.bindings.ShortQty.inputValue}"
+                          required="#{bindings.VOCustScannedLines2.hints.ShortQty.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.ShortQty.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.ShortQty.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.ShortQty.tooltip}" id="it15"
+                          disabled="#{bindings.ScanComplete.inputValue eq 'Y'}"
+                          readOnly="#{bindings.ScanComplete.inputValue eq 'Y'}">
+              <f:validator binding="#{row.bindings.ShortQty.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.ShortQty.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.ScannedDate.label}" id="c12">
+            <af:inputDate value="#{row.bindings.ScannedDate.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.ScannedDate.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.ScannedDate.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.ScannedDate.displayWidth}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.ScannedDate.tooltip}" id="id3"
+                          readOnly="true">
+              <f:validator binding="#{row.bindings.ScannedDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.VOCustScannedLines2.hints.ScannedDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.CreatedDate.label}" id="c13" rendered="false">
+            <af:inputDate value="#{row.bindings.CreatedDate.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.CreatedDate.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.CreatedDate.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.CreatedDate.displayWidth}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.CreatedDate.tooltip}" id="id4">
+              <f:validator binding="#{row.bindings.CreatedDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.VOCustScannedLines2.hints.CreatedDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.UpdatedDate.label}" id="c14" rendered="false">
+            <af:inputDate value="#{row.bindings.UpdatedDate.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.UpdatedDate.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.UpdatedDate.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.UpdatedDate.displayWidth}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.UpdatedDate.tooltip}" id="id5">
+              <f:validator binding="#{row.bindings.UpdatedDate.validator}"/>
+              <af:convertDateTime pattern="#{bindings.VOCustScannedLines2.hints.UpdatedDate.format}"/>
+            </af:inputDate>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.CreatedBy.label}" id="c15" rendered="false">
+            <af:inputText value="#{row.bindings.CreatedBy.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.CreatedBy.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.CreatedBy.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.CreatedBy.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.CreatedBy.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.CreatedBy.tooltip}" id="it22">
+              <f:validator binding="#{row.bindings.CreatedBy.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.CreatedBy.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.UpdatedBy.label}" id="c16" rendered="false">
+            <af:inputText value="#{row.bindings.UpdatedBy.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.UpdatedBy.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.UpdatedBy.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.UpdatedBy.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.UpdatedBy.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.UpdatedBy.tooltip}" id="it23">
+              <f:validator binding="#{row.bindings.UpdatedBy.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.UpdatedBy.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.Version.label}" id="c17" rendered="false">
+            <af:inputText value="#{row.bindings.Version.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.Version.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.Version.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.Version.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.Version.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.Version.tooltip}" id="it24">
+              <f:validator binding="#{row.bindings.Version.validator}"/>
+              <af:convertNumber groupingUsed="false" pattern="#{bindings.VOCustScannedLines2.hints.Version.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.Status.label}" id="c18">
+            <af:inputText value="#{row.bindings.Status.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.Status.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.Status.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.Status.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.Status.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.Status.tooltip}" id="it25" readOnly="true">
+              <f:validator binding="#{row.bindings.Status.validator}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.ReturnQuantity.label}" id="c19" rendered="false">
+            <af:inputText value="#{row.bindings.ReturnQuantity.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.ReturnQuantity.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.ReturnQuantity.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.ReturnQuantity.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.ReturnQuantity.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.ReturnQuantity.tooltip}" id="it26">
+              <f:validator binding="#{row.bindings.ReturnQuantity.validator}"/>
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.VOCustScannedLines2.hints.ReturnQuantity.format}"/>
+            </af:inputText>
+          </af:column>
+          <af:column headerText="#{bindings.VOCustScannedLines2.hints.ScanHeaderId.label}" id="c20" rendered="false">
+            <af:inputText value="#{row.bindings.ScanHeaderId.inputValue}"
+                          label="#{bindings.VOCustScannedLines2.hints.ScanHeaderId.label}"
+                          required="#{bindings.VOCustScannedLines2.hints.ScanHeaderId.mandatory}"
+                          columns="#{bindings.VOCustScannedLines2.hints.ScanHeaderId.displayWidth}"
+                          maximumLength="#{bindings.VOCustScannedLines2.hints.ScanHeaderId.precision}"
+                          shortDesc="#{bindings.VOCustScannedLines2.hints.ScanHeaderId.tooltip}" id="it27">
+              <f:validator binding="#{row.bindings.ScanHeaderId.validator}"/>
+              <af:convertNumber groupingUsed="false"
+                                pattern="#{bindings.VOCustScannedLines2.hints.ScanHeaderId.format}"/>
+            </af:inputText>
+          </af:column>
+        </af:table>
+      </f:facet>
+      <f:facet name="second">
+        <af:region value="#{bindings.diagrams1.regionModel}" id="r1" rendered="true"/>
+      </f:facet>
+    </af:panelSplitter>
+    <af:panelFormLayout id="pfl3" rendered="false">
+      <af:inputText value="#{bindings.pack_id.inputValue}" label="#{bindings.pack_id.hints.label}"
+                    required="#{bindings.pack_id.hints.mandatory}" columns="#{bindings.pack_id.hints.displayWidth}"
+                    maximumLength="#{bindings.pack_id.hints.precision}" shortDesc="#{bindings.pack_id.hints.tooltip}"
+                    id="it29">
+        <f:validator binding="#{bindings.pack_id.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.pack_id.format}"/>
+      </af:inputText>
+      <af:inputText value="#{bindings.cid.inputValue}" label="#{bindings.cid.hints.label}"
+                    required="#{bindings.cid.hints.mandatory}" columns="#{bindings.cid.hints.displayWidth}"
+                    maximumLength="#{bindings.cid.hints.precision}" shortDesc="#{bindings.cid.hints.tooltip}" id="it30">
+        <f:validator binding="#{bindings.cid.validator}"/>
+        <af:convertNumber groupingUsed="false" pattern="#{bindings.cid.format}"/>
+      </af:inputText>
+      <af:button actionListener="#{bindings.ExecuteWithParams.execute}" text="ExecuteWithParams"
+                 disabled="#{!bindings.ExecuteWithParams.enabled}" id="b8"/>
+    </af:panelFormLayout>
+  </af:panelGroupLayout>
+</ui:composition>
